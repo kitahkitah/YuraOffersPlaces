@@ -1,0 +1,31 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  <title>
+    {% block title %}
+      Юра предлагает вам лучшие места
+    {% endblock title %}
+  </title>
+</head>
+
+<body>
+  <header>
+    {% include 'includes/header.html' %}
+  </header>
+
+  <main>
+    <div class="container py-4">
+      {% block content %}
+        Пусто, Юра не предлагает
+      {% endblock content %}
+    </div>
+  </main>
+</body>
+</html>

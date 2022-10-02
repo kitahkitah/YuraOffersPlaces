@@ -1,0 +1,44 @@
+{% load static %}
+
+
+{% with request.resolver_match.view_name as view_name %}
+
+<nav class="navbar navbar-light" style="background-color: lightgreen">
+  <div class="container">
+    <a class="navbar-brand" style="text-shadow:5px 4px 10px rgba(79, 147, 211, 0.9)" href="{% url 'posts:index' %}"><strong>Юра</strong> предлагает места</a>
+
+    <div class="dropdown">
+      <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown">
+        Меню
+      </button>
+
+      <ul class="dropdown-menu">
+        {% if request.user.is_authenticated %}
+          {% if view_name  == 'users:my_profile' %}
+            <li>
+              <a class="dropdown-item" href="{% url 'users:edit_my_profile' %}">Изменить мой профиль</a>
+            </li>
+          {% else %}
+            <li>
+              <a class="dropdown-item" href="{% url 'users:my_profile' %}">Мой профиль</a>
+            </li>
+          {% endif %}
+
+          <li>
+            <a class="dropdown-item" href="{% url 'users:logout' %}">Выйти</a>
+          </li>
+        {% else %}
+          <li>
+            <a class="dropdown-item" href="{% url 'users:login' %}">Войти</a>
+          </li>
+
+          <li>
+            <a class="dropdown-item" href="{% url 'users:signup' %}">Регистрация</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{% endwith %}

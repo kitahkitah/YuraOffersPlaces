@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+  Главная страница
+{% endblock title %}
+
+
+{% block content %}
+  <section class="row justify-content-evenly">
+    <div class="col-lg-5 card text-bg-light align-self-start">
+      <div class="card-header">Выберите категорию.</div>
+
+      <div class="card-body">
+        <p><strong>Ваш IP</strong>: {{ ip }}.</p>
+        <p><strong>Город</strong>: {{ city }}.</p>
+
+        <form method="post" action="">
+          {% csrf_token %}
+        
+          {% for field in form %}
+              <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+              <div class="row">{{ field }}</div>
+          {% endfor %}
+
+          <div class="d-grid py-3 col-4 mx-auto">
+            <button class="btn btn-success btn-sm" type="submit">Подтвердить</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-lg-5 card">
+      <ul class="list-group list-group-flush">
+        {% for place in best_places %}
+          <li class="list-group-item">
+            <p><strong>Название</strong>: {{ place.name }}</p>
+            <p><strong>Адрес</strong>: {{ place.address }}</p>
+            <p><strong>Рейтинг</strong>: {{ place.rating }}</p>
+            <p><strong>Количество оценок</strong>: {{ place.reviews_amount }}</p>
+          </li>
+        {% empty %}
+          <small class="text-muted position-absolute top-50 start-50 translate-middle"
+          >Здесь будут релевантные места</small>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+{% endblock content %}

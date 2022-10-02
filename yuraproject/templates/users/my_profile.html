@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+  Мой профиль
+{% endblock title %}
+
+{% block content %}
+  <section class="row justify-content-evenly">
+    <div class="col-lg-5 card text-bg-light align-self-start">
+      <div class="card-header">Моя информация.</div>
+
+      <div class="card-body">
+        <p><strong>Имя пользователя</strong>: {{ user.username }}</p>
+        <p><strong>Имя</strong>: {{ user.first_name }}</p>
+        <p><strong>Фамилия</strong>: {{ user.last_name}}</p>
+        <p><strong>Email</strong>: {{ user.email }}</p>
+      </div>
+    </div>
+
+    <div class="col-lg-5 card">
+      <div class="card-header">Предыдущие запросы.</div>
+
+      {% for user_request in requests_page_obj %}
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            {% for place in user_request.place_set.all %}
+              <li class="list-group-item">
+                <p><strong>Название</strong>: {{ place.name }}</p>
+                <p><strong>Адрес</strong>: {{ place.address }}</p>
+                <p><strong>Рейтинг</strong>: {{ place.rating }}</p>
+                <p><strong>Количество оценок</strong>: {{ place.reviews_amount }}</p>
+              </li>
+            {% endfor %}
+          </ul>
+        </div> 
+        <div class="card-footer">
+          <p><small>Запрос от {{ user_request.date }}</small></p>
+        </div>
+      {% empty %}
+        <div class="card-body">
+          <small class="text-muted position-absolute top-50 start-50 translate-middle"
+          >Вы не делали ещё запросов</small>
+        </div>
+      {% endfor %}
+
+      {% if requests_page_obj %}
+        <ul class="pagination justify-content-center">
+          {% for i in requests_page_obj.paginator.page_range %}
+            {% if requests_page_obj.number == i %}
+              <li class="page-item active page-link">{{ i }}</li>
+            {% else %}
+              <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  </section>
+{% endblock content %}
