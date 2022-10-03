@@ -9,8 +9,6 @@
 ## **Описание/Description:**
 *RU:* Курсовая работа. Сервис, предлагающий пользователю 3 релеватных места (по данным 2GIS), исходя из выбранной категории. IP определяется автоматически. Местоположение определяется по данным Dadata. В сервисе также реализованы регистрация и авторизация, возможность редактирования профиля и просмотр 5 предыдущих запросов.
 
-*EN:* Course work. A service that offers to the user 3 relevant places (according to service '2GIS'), based on the selected category. IP is determined automatically. The location is determined according to service 'Dadata'. The service also implements registration and authorization, the ability to edit profile and to view 5 previous requests.
-
 ---
 
 ### **Автор/Author:**
