@@ -10,7 +10,8 @@ services:
       - ./.env
     command: >
       sh -c "python3 manage.py migrate --no-input &&
-            gunicorn yuraproject.wsgi:application --bind 0:8000"
+             python3 manage.py collectstatic --no-input &&
+             gunicorn yuraproject.wsgi:application --bind 0:8000"
 
   nginx:
     image: nginx:1.23.1-alpine

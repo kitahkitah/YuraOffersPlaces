@@ -19,8 +19,8 @@ PLACE_CATEGORY_CHOICES = [
 class UserRequest(models.Model):
     """Модель пользовательского запроса."""
 
-    category = models.CharField(max_length=3, choices=PLACE_CATEGORY_CHOICES)
-    city = models.CharField(max_length=50)
+    category = models.CharField('категория', max_length=3, choices=PLACE_CATEGORY_CHOICES)
+    city = models.CharField('город', max_length=50)
     date = models.DateTimeField('дата запроса', auto_now_add=True)
     user = models.ForeignKey(
         User,
@@ -53,7 +53,6 @@ class Place(models.Model):
     name = models.CharField('название', max_length=150)
     rating = models.DecimalField('рейтинг', max_digits=3, decimal_places=2)
     reviews_amount = models.PositiveSmallIntegerField('количество оценок')
-    # schedule = models.CharField('график работы', max_length=150)
     user_request = models.ForeignKey(
         UserRequest,
         on_delete=models.CASCADE,
